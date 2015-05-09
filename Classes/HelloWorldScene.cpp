@@ -17,6 +17,7 @@ Scene* HelloWorld::createScene()
     return scene;
 }
 
+
 // on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
@@ -72,6 +73,37 @@ bool HelloWorld::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
     
+    //
+    auto listener = EventListenerTouchOneByOne::create();
+    
+    listener->setSwallowTouches(true);
+    
+    listener->onTouchBegan = [](Touch* touch, Event* event){
+        log("TouchBegan");
+        return true;
+    };
+    
+    listener->setSwallowTouches(true);
+    
+    listener->onTouchMoved = [](Touch* touch, Event* event){
+        
+        log("TouchMoved");
+        
+        
+    };
+    listener->onTouchEnded = [](Touch* touch, Event* event){
+        
+        log("TouchEnded");
+        
+    };
+    listener->onTouchCancelled = [](Touch* touch, Event* event){
+        
+        log("touchCancelled");
+        
+    };
+    this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
+    //
+
     return true;
 }
 
